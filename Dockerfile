@@ -1,6 +1,12 @@
-FROM node:18-alpine
+FROM node:18
+
 WORKDIR /app
-COPY . .
-RUN npm init -y && npm install
-EXPOSE 3000
-CMD ["node", "index.js"]
+
+# First copy package files
+COPY package*.json ./
+RUN npm install
+
+# Then copy source code (VERY IMPORTANT)
+COPY index.js .
+
+CMD ["node","index.js"]
