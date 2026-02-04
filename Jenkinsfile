@@ -46,17 +46,16 @@ pipeline {
     }
 
     stage('Deploy') {
-      steps {
-        sh '''
-          docker stop demo || true
-          docker rm demo || true
-        docker run -d -p 3000:3000 \
---name demo \
--e BUILD_NUMBER=$BUILD_NUMBER \
-manu1024/demo-app:$BUILD_NUMBER
-
-        '''
-      }
-    }
+  steps {
+    sh '''
+      docker stop demo || true
+      docker rm demo || true
+      docker run -d -p 3000:3000 \
+      --name demo \
+      -e BUILD_NUMBER=$BUILD_NUMBER \
+      manu1024/demo-app:$BUILD_NUMBER
+    '''
+  }
+}
   }
 }
